@@ -1,0 +1,32 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "services": {
+    "api": {
+      "root": "apps/api",
+      "framework": "express",
+      "rewrites": [{ "source": "/(.*)", "destination": "/api" }]
+    },
+    "web": {
+      "root": "apps/web",
+      "framework": "sveltekit-1",
+      "outputDirectory": "build",
+      "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
+      "headers": [
+        {
+          "source": "/_app/(.*)",
+          "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+        }
+      ]
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": { "service": "api" }
+    },
+    {
+      "source": "/(.*)",
+      "destination": { "service": "web" }
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.PUBLIC_API_URL || 'http://localhost:3001';
+const API_URL = import.meta.env.PUBLIC_API_URL || '';
 
 export function getToken() {
   return typeof localStorage !== 'undefined' ? localStorage.getItem('token') : null;
