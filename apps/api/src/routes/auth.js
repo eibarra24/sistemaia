@@ -49,7 +49,7 @@ router.post('/login', async (req, res, next) => {
       .maybeSingle();
     if (error) throw error;
 
-    const valid = user && (await bcrypt.compare(password, user.password_hash));
+    const valid = user?.password_hash && (await bcrypt.compare(password, user.password_hash));
     if (!valid) return res.status(401).json({ error: 'Credenciales inválidas' });
 
     res.json({
